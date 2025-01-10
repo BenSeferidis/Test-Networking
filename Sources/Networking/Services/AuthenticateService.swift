@@ -40,7 +40,7 @@ public actor AuthenticateService {
                 throw NetworkError.badUrl(nil)
             }
             do {
-                let data = try await networkService.request(endpoint: oauthEndpoint)
+                let data = try await networkService.makeRequest(endpoint: oauthEndpoint)
                 let response: OAuthResponse = try JSONDecoder().decode(OAuthResponse.self, from: data)
                 guard let newToken = response.token else {
                     throw NetworkError.reAuthFailed(nil)
